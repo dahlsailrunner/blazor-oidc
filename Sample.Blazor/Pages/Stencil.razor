@@ -31,19 +31,17 @@
     <tbody>
         @foreach (var item in navList)
         {
-        <tr>
-            <td>@item.Title</td>
-            <td>@item.Icon</td>
-            <td>@item.Url</td>
-        </tr>
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Icon</td>
+                <td>@item.Url</td>
+            </tr>
         }
-        
+
     </tbody>
 </table>
 
-<custom-elements-table items="@navListJson"></custom-elements-table>
-
-<!-- TODO:  Add something like <custom-element> here with an items property that should be bound to the navList somehow -->
+<custom-elements-table items=@navListJson></custom-elements-table>
 
 @code {
     private string navListJson;
@@ -52,7 +50,7 @@
     protected override void OnInitialized()
     {
         navList = new List<NavItem>
-        {
+    {
             new NavItem {Title = "Home", Icon = "fa fa-cog", Url = "/" },
             new NavItem {Title = "Somplace Else", Icon = "fa fa-bang", Url = "/elsewhere" }
         };
@@ -60,12 +58,12 @@
         var options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true,            
+            WriteIndented = true,
         };
 
         navListJson = JsonSerializer.Serialize(navList, options);
-
     }
+    
     public class NavItem
     {
         public string Title { get; set; }

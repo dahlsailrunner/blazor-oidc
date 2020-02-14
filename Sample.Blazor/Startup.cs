@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Sample.Blazor.ApiCallerFeature;
 using Sample.Blazor.Data;
 
 namespace Sample.Blazor
@@ -42,7 +43,7 @@ namespace Sample.Blazor
 
                     options.GetClaimsFromUserInfoEndpoint = true;
                     options.SaveTokens = true;
-                    options.ClaimActions.MapAllExcept("nbf", "exp", "aud", "nonce", "iat", "c_hash");
+                    options.ClaimActions.MapAllExcept("nbf", "exp", "nonce", "iat", "c_hash");
 
                     options.TokenValidationParameters = new TokenValidationParameters
                         {
@@ -66,7 +67,7 @@ namespace Sample.Blazor
             services.AddSingleton<WeatherForecastService>();
             //services.AddSingleton<IEventAggregator, EventAggregator.Blazor.EventAggregator>();
 
-            //services.AddSingleton<ProductApiService>();
+            services.AddTransient<ApiCallerService>();
 
             //services.AddScoped<AlertService>();
         }

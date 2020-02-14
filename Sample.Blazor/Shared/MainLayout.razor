@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthStateProvider
 
 <div class="sidebar">
     <NavMenu />
@@ -6,10 +7,21 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/en-us/aspnet/" target="_blank">About</a>
+        @name
     </div>
 
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+@code
+{ 
+    private string name;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        name = authState.User.Claims.FirstOrDefault(c=> c.Type == "name")?.Value;
+    }
+}

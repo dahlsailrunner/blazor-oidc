@@ -1,0 +1,73 @@
+﻿@page "/stencil"
+@using System.Text.Json
+
+<h3>StencilComponent</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Field</th>
+            <th scope="col">Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>navListJson</td>
+            <td>@navListJson</td>
+        </tr>
+        <tr>
+            <td>navList</td>
+            <td>@navList</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Icon</th>
+            <th scope="col">Url</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in navList)
+        {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Icon</td>
+            <td>@item.Url</td>
+        </tr>
+        }
+        
+    </tbody>
+</table>
+
+<!-- TODO:  Add something like <custom-element> here with an items property that should be bound to the navList somehow -->
+
+@code {
+    private string navListJson;
+    private List<NavItem> navList;
+
+    protected override void OnInitialized()
+    {
+        navList = new List<NavItem>
+    {
+            new NavItem {Title = "Home", Icon = "fa fa-cog", Url = "/" },
+            new NavItem {Title = "Somplace Else", Icon = "fa fa-bang", Url = "/elsewhere" }
+        };
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true,            
+        };
+
+        navListJson = JsonSerializer.Serialize(navList, options);
+
+    }
+    public class NavItem
+    {
+        public string Title { get; set; }
+        public string Icon { get; set; }
+        public string Url { get; set; }
+    }
+}

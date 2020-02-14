@@ -1,0 +1,40 @@
+﻿@page "/fetchapidata"
+@inject ApiCallerService ApiCallerSvc
+
+<h3>FetchApiData</h3>
+
+<p>This page includes a "loading spinner" that will spin when the API call is happening.</p>
+
+<div>
+    <p>RESULT:  @_apiResult</p>
+    @if (_loading)
+    {
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    }
+</div>
+
+
+@code {
+    private string _apiResult;
+    private bool _loading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _loading = true;
+            _apiResult = await ApiCallerSvc.GetResultFromApi();
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Error from ApiCallerSvc.GetResultFromApi!!");
+            //AlertSvc.Error("An error occurred in the method we just called.");
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

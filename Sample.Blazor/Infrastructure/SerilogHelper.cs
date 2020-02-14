@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Debugging;
 using Serilog.Enrichers.AspnetcoreHttpcontext;
+using Serilog.Formatting.Compact;
 
 namespace Sample.Blazor.Infrastructure
 {
@@ -34,13 +35,12 @@ namespace Sample.Blazor.Infrastructure
 
             var logFilePath = config.GetValue<string>("Logging:FilePath");
 
-            loggerConfig.WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day);
+            loggerConfig.WriteTo.File(new CompactJsonFormatter(), logFilePath, rollingInterval: RollingInterval.Day);
         }
 
         private static UserInfo AddCustomContextDetails(IHttpContextAccessor hca)
         {
-            //var excluded = new List<string> {"nbf", "exp", "auth_time", "amr", "sub", "greenBookUrl", "aud", "middleName", "jti", "orgType", "orgPartyId", "userPartyId"};
-            var excluded = new List<string> {"sub"};
+            var excluded = new List<string> {"nbf", "exp", "auth_time", "amr", "sub", "aud", "jti", "at_hash", "s_hash" };
             const string userIdClaimType = "sub";
 
             var context = hca.HttpContext;

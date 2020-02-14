@@ -5,8 +5,8 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Field</th>
-            <th scope="col">Value</th>
+            <th>Field</th>
+            <th>Value</th>
         </tr>
     </thead>
     <tbody>
@@ -23,9 +23,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Icon</th>
-            <th scope="col">Url</th>
+            <th>Title</th>
+            <th>Icon</th>
+            <th>Url</th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +41,8 @@
     </tbody>
 </table>
 
+<custom-elements-table items="@navListJson"></custom-elements-table>
+
 <!-- TODO:  Add something like <custom-element> here with an items property that should be bound to the navList somehow -->
 
 @code {
@@ -50,7 +52,7 @@
     protected override void OnInitialized()
     {
         navList = new List<NavItem>
-    {
+        {
             new NavItem {Title = "Home", Icon = "fa fa-cog", Url = "/" },
             new NavItem {Title = "Somplace Else", Icon = "fa fa-bang", Url = "/elsewhere" }
         };

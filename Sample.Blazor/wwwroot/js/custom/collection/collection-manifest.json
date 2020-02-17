@@ -1,7 +1,7 @@
 {
   "entries": [
-    "components/elements-shell/elements-shell.js",
-    "components/elements-table/elements-table.js"
+    "components/elements-table/elements-table.js",
+    "components/elements-shell/elements-shell.js"
   ],
   "compiler": {
     "name": "@stencil/core",

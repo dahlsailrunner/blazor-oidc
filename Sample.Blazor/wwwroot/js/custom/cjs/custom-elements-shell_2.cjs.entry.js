@@ -30,7 +30,7 @@ const ElementsTable = class {
         core.registerInstance(this, hostRef);
     }
     render() {
-        return (core.h("table", { class: "table" }, core.h("thead", null, core.h("tr", null, core.h("th", null, "Title"), core.h("th", null, "Icon"), core.h("th", null, "Url"))), core.h("tbody", null, this.items.map((item) => core.h("tr", null, core.h("td", null, item['item']), core.h("td", null, item['icon']), core.h("td", null, item['url']))))));
+        return (core.h("table", { class: "table" }, core.h("thead", null, core.h("tr", null, core.h("th", null, "Title"), core.h("th", null, "Icon"), core.h("th", null, "Url"))), core.h("tbody", null, this.items.map((item) => core.h("tr", null, core.h("td", null, item['title']), core.h("td", null, item['icon']), core.h("td", null, item['url']))))));
     }
     static get style() { return ":host{display:block}"; }
 };

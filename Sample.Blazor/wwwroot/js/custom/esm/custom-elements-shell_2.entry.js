@@ -26,7 +26,7 @@ const ElementsTable = class {
         registerInstance(this, hostRef);
     }
     render() {
-        return (h("table", { class: "table" }, h("thead", null, h("tr", null, h("th", null, "Title"), h("th", null, "Icon"), h("th", null, "Url"))), h("tbody", null, this.items.map((item) => h("tr", null, h("td", null, item['item']), h("td", null, item['icon']), h("td", null, item['url']))))));
+        return (h("table", { class: "table" }, h("thead", null, h("tr", null, h("th", null, "Title"), h("th", null, "Icon"), h("th", null, "Url"))), h("tbody", null, this.items.map((item) => h("tr", null, h("td", null, item['title']), h("td", null, item['icon']), h("td", null, item['url']))))));
     }
     static get style() { return ":host{display:block}"; }
 };

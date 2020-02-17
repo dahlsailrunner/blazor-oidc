@@ -1,8 +1,8 @@
 ﻿@page "/stencil"
-@using System.Text.Json
+@inject IJSRuntime JSRuntime
 
 <h3>Stencil Component</h3>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>Field</th>
@@ -19,7 +19,7 @@
             <td>@navList</td>
         </tr>
     </tbody>
-</table>
+</table>*@
 <table class="table">
     <thead>
         <tr>
@@ -41,11 +41,19 @@
     </tbody>
 </table>
 
-<custom-elements-table items=@navListJson></custom-elements-table>
+<h3>Bound Table</h3>
+<custom-elements-table items=@navList></custom-elements-table>
+
+<h3>Ref Table with Interop</h3>
+<custom-elements-table @ref="navListRef"></custom-elements-table>
+
+<h3>Inline Table</h3>
+<custom-elements-table id="inline-table"></custom-elements-table>
 
 @code {
-    private string navListJson;
+    //private string navListJson;
     private List<NavItem> navList;
+    private ElementReference navListRef;
 
     protected override void OnInitialized()
     {
@@ -55,15 +63,24 @@
             new NavItem {Title = "Somplace Else", Icon = "fa fa-bang", Url = "/elsewhere" }
         };
 
-        var options = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true,
-        };
+        //var options = new JsonSerializerOptions
+        //{
+        //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        //    WriteIndented = true,
+        //};
 
-        navListJson = JsonSerializer.Serialize(navList, options);
+        //navListJson = JsonSerializer.Serialize(navList, options);
     }
-    
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("jsInterop.setLeftNavItems", navListRef, navList);
+            await JSRuntime.InvokeVoidAsync("jsInterop.setLeftNavItemsForInline");
+        }
+    }
+
     public class NavItem
     {
         public string Title { get; set; }

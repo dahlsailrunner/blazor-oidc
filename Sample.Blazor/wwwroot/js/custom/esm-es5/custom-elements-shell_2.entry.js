@@ -25,7 +25,7 @@ var ElementsTable = /** @class */ (function () {
         registerInstance(this, hostRef);
     }
     ElementsTable.prototype.render = function () {
-        return (h("table", { class: "table" }, h("thead", null, h("tr", null, h("th", null, "Title"), h("th", null, "Icon"), h("th", null, "Url"))), h("tbody", null, this.items.map(function (item) { return h("tr", null, h("td", null, item['item']), h("td", null, item['icon']), h("td", null, item['url'])); }))));
+        return (h("table", { class: "table" }, h("thead", null, h("tr", null, h("th", null, "Title"), h("th", null, "Icon"), h("th", null, "Url"))), h("tbody", null, this.items.map(function (item) { return h("tr", null, h("td", null, item['title']), h("td", null, item['icon']), h("td", null, item['url'])); }))));
     };
     Object.defineProperty(ElementsTable, "style", {
         get: function () { return ":host{display:block}"; },

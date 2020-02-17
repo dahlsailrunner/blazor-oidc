@@ -8,7 +8,7 @@ export class ElementsTable {
                     h("th", null, "Icon"),
                     h("th", null, "Url"))),
             h("tbody", null, this.items.map((item) => h("tr", null,
-                h("td", null, item['item']),
+                h("td", null, item['title']),
                 h("td", null, item['icon']),
                 h("td", null, item['url']))))));
     }
